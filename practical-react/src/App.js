@@ -1,65 +1,47 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-
-const Body = (props) => (
-  <div>
-    <p className="App-intro">{props.text}</p>
-    <p className="App-intro">{props.text2}</p>
-    <p className="App-intro">{props.myFunc(1, 2)}</p>
-  </div>
-);
-
-// const Body = () => {
-//   return (
-//     <p className="App-intro">
-//       To get started, edit <code>src/App.js</code> and save to reload.
-//     </p>
-//   );
-// };
-
-// function Body() {
-//   return (
-//     <p className="App-intro">
-//       To get started, edit <code>src/App.js</code> and save to reload.
-//     </p>
-//   );
-// }
-
-class Header extends Component {
-  render() {
-    return (
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">{this.props.title}</h1>
-        <div>{this.props.myFunc(10, 100)}</div>
-      </header>
-    );
-  }
-}
+import ImageSlider from "./components/ImageSlider";
+import Counter from "./components/Counter";
+import Header from "./components/Header";
 
 class App extends Component {
-  add(a, b) {
-    return a + b;
-  }
+  state = {
+    visible: true,
+    whichComponentToShow: "ImageSlider",
+  };
 
   render() {
-    return (
-      <div className="App">
-        <Header
-          title={"Hello"}
-          num={7}
-          myArr={[10, 2, 3]}
-          myFunc={this.add}
-          myObj={{
-            a: 5,
-            b: 6,
-          }}
-        />
-        <Body myFunc={this.add} text="I'm cool" text2="I'm cool2" />
-        <Body myFunc={this.add} text="I'm" text2="cool2" />
-      </div>
-    );
+    if (this.state.whichComponentToShow === "ImageSlider") {
+      return (
+        <div className="App">
+          <ImageSlider />
+          <button
+            onClick={() => this.setState({ whichComponentToShow: "Counter" })}
+          >
+            show counter
+          </button>
+        </div>
+      );
+    } else if (this.state.whichComponentToShow === "Counter") {
+      return (
+        <div className="App">
+          <Counter />
+          <button
+            onClick={() => this.setState({ whichComponentToShow: "Header" })}
+          >
+            show header
+          </button>
+        </div>
+      );
+    } else if (this.state.whichComponentToShow === "Header") {
+      return (
+        <div className="App">
+          <Header />
+        </div>
+      );
+    }
+
+    return null;
   }
 }
 
