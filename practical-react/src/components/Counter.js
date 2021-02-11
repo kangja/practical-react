@@ -5,9 +5,13 @@ export default class Counter extends React.Component {
     count: 0,
   };
 
-  // handleButtonClick() {
-  //   console.log(this);
-  // }
+  componentWillUnmount() {
+    console.log("unmounting...");
+  }
+
+  componentDidMount() {
+    console.log("mounting...");
+  }
 
   increment = () => {
     this.setState({
