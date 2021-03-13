@@ -10,27 +10,25 @@ export default class TodoList extends React.Component {
   };
 
   addTodo = (todo) => {
-    this.setState({
-      todos: [todo, ...this.state.todos],
-    });
+    this.setState((state) => ({
+      todos: [todo, ...state.todos],
+    }));
   };
-  f;
 
   toggleComplete = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
+    this.setState((state) => ({
+      todos: state.todos.map((todo) => {
         if (todo.id === id) {
           // suppose to update
           return {
             ...todo,
-
             complete: !todo.complete,
           };
         } else {
           return todo;
         }
       }),
-    });
+    }));
   };
 
   updateTodoToShow = (s) => {
@@ -40,15 +38,15 @@ export default class TodoList extends React.Component {
   };
 
   handleDeleteTodo = (id) => {
-    this.setState({
-      todos: this.state.todos.filter((todo) => todo.id !== id),
-    });
+    this.setState((state) => ({
+      todos: state.todos.filter((todo) => todo.id !== id),
+    }));
   };
 
   removeAllTodosThatAreComplete = () => {
-    this.setState({
-      todos: this.state.todos.filter((todo) => !todo.complete),
-    });
+    this.setState((state) => ({
+      todos: state.todos.filter((todo) => !todo.complete),
+    }));
   };
 
   render() {
@@ -95,13 +93,13 @@ export default class TodoList extends React.Component {
         <div>
           <button
             onClick={() =>
-              this.setState({
-                todos: this.state.todos.map((todo) => ({
+              this.setState((state) => ({
+                todos: state.todos.map((todo) => ({
                   ...todo,
-                  complete: this.state.toggleAllComplete,
+                  complete: state.toggleAllComplete,
                 })),
-                toggleAllComplete: !this.state.toggleAllComplete,
-              })
+                toggleAllComplete: !state.toggleAllComplete,
+              }))
             }
           >
             toggle all complete: {`${this.state.toggleAllComplete}`}
