@@ -32,7 +32,6 @@ export default class TodoList extends React.Component {
   };
 
   updateTodoToShow = (s) => {
-    f;
     this.setState({
       todoToShow: s,
     });
